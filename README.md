@@ -13,14 +13,14 @@ check-debian-reboot-required
 ## Installation
 
 ```sh
-sudo mkr plugin install Arthur1/check-debian-reboot-required@x.y.z
+sudo mkr plugin install Arthur1/check-debian-reboot-required
 ```
 
 ## Setting for mackerel-agent
 
 ```
 [plugin.checks.check-debian-reboot-required]
-command = ["check-debian-reboot-required"]
+command = ["/opt/mackerel-agent/plugins/bin/check-debian-reboot-required"]
 ```
 
 ## Usage
