@@ -14,6 +14,7 @@ jobs:
       - name: golangci-lint
         uses: golangci/golangci-lint-action@v3
         with:
+          skip-pkg-cache: true
           args: --timeout=10m
 
   test:
@@ -23,4 +24,8 @@ jobs:
       - uses: actions/setup-go@v5
         with:
           go-version-file: go.mod
-      - run: go test ./...
+      - run: |
+          set -o pipefail
+          go test -json ./... |
+          go run -mod=mod github.com/mfridman/tparse -all -format markdown >>"$GITHUB_STEP_SUMMARY"
+          cat "$GITHUB_STEP_SUMMARY"
